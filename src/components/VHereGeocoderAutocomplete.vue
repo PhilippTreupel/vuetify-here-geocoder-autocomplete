@@ -65,7 +65,7 @@ export default {
     lang: {
       type: String,
       required: false,
-      default: navigator.language
+      default: navigator.language ? navigator.language : null
     },
     resultType: {
       type: String,
@@ -164,7 +164,7 @@ export default {
       if (this.types !== null) {
         finalSearchQuery += "&types=" + this.types;
       }
-      if (this.lang) {
+      if (this.lang !== null) {
         finalSearchQuery += "&lang=" + this.lang;
       }
       return finalSearchQuery;
