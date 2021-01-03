@@ -4,7 +4,7 @@
 
 ## Demo
 
-A demo is available [here](https://vuetify-algolia-places.netlify.com).
+A demo is available [here](#Demo).
 
 ## Installation
 
