@@ -24,7 +24,7 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        href="https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autocomplete-brief.html"
         target="_blank"
         text
       >
@@ -47,8 +47,9 @@
                     :here-api-key="hereApiKey"
                     v-model="place"
                     debounce-time
-                    @input="print"
                     clearable
+                    types="area"
+                    administrative-area-type="country"
                   >
                   </v-here-geocoder-autocomplete>
                 </v-col>
@@ -89,9 +90,6 @@ export default {
     place: "Zaberfeld"
   }),
   methods: {
-    print() {
-      console.log(this.place);
-    },
     customHighlight(placeItem) {
       if (placeItem.highlights.title != null) {
         let ret = placeItem.title;
@@ -111,7 +109,6 @@ export default {
           // number of characters added with the bold tag
           incrementCounter += 7;
         });
-        ret += "custom";
         return ret;
       } else {
         return placeItem.title;
