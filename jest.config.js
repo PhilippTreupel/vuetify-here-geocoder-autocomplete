@@ -1,5 +1,8 @@
 module.exports = {
   preset: "@vue/cli-plugin-unit-jest",
+  collectCoverage: true,
+  collectCoverageFrom: ["src/components/*.{js,vue}"],
+  automock: false,
   transform: {
     "^.+\\.(js|jsx)?$": "babel-jest",
     "^.+\\.vue$": "vue-jest"

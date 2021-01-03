@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "author": "Philipp Treupel",
   "license": "MIT",
-  "main": "dist/VCleaveInput.common.js",
+  "main": "dist/VHereGeocoderAutocomplete.common.js",
   "homepage": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --name VCleaveInput src/components/VCleaveInput.vue"
+    "build:lib": "vue-cli-service build --target lib --name VHereGeocoderAutocomplete src/components/VHereGeocoderAutocomplete.vue"
   },
   "dependencies": {},
   "devDependencies": {
@@ -22,16 +22,25 @@
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^6.2.2",
+    "flush-promises": "^1.0.2",
+    "jest-fetch-mock": "^3.0.3",
     "prettier": "^1.19.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
+    "sinon": "^9.2.2",
     "vue": "^2.6.11",
     "vue-cli-plugin-vuetify": "^2.0.9",
     "vue-template-compiler": "^2.6.11",
     "vuetify": "^2.2.11",
     "vuetify-loader": "^1.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
