@@ -204,19 +204,14 @@ export default {
         const oldQuery = oldVal.split("?q=")[1].split("&")[0];
         const newQuery = newVal.split("?q=")[1].split("&")[0];
         if (newQuery !== "" && newQuery === oldQuery) {
-          this.debouncedSearchPlaces(place => {
-            this.place = place;
-          });
+          this.debouncedSearchPlaces(this.setPlace);
         }
       }
     }
   },
   mounted() {
     if (this.queryReady) {
-      this.searchPlaces(place => {
-        this.place = place;
-        this.$emit("input", this.place);
-      });
+      this.searchPlaces(this.emitInputOnMountedSearch);
     }
   },
   methods: {
@@ -231,14 +226,15 @@ export default {
             if (this.resultType !== null) {
               searchResults = searchResults.filter(item => {
                 return (
-                  item.resultType != null && item.resultType === this.resultType
+                  item.resultType !== null &&
+                  item.resultType === this.resultType
                 );
               });
             }
             if (this.localityType !== null) {
               searchResults = searchResults.filter(item => {
                 return (
-                  item.localityType != null &&
+                  item.localityType !== null &&
                   item.localityType === this.localityType
                 );
               });
@@ -246,7 +242,7 @@ export default {
             if (this.administrativeAreaType !== null) {
               searchResults = searchResults.filter(item => {
                 return (
-                  item.administrativeAreaType != null &&
+                  item.administrativeAreaType !== null &&
                   item.administrativeAreaType === this.administrativeAreaType
                 );
               });
@@ -254,7 +250,7 @@ export default {
             if (this.houseNumberType !== null) {
               searchResults = searchResults.filter(item => {
                 return (
-                  item.houseNumberType != null &&
+                  item.houseNumberType !== null &&
                   item.houseNumberType === this.houseNumberType
                 );
               });
@@ -281,12 +277,17 @@ export default {
         this.$emit("error", error);
       }
     },
-    async debouncedSearchPlaces(callback = () => {}) {
-      return await this.searchPlaces(callback);
-    },
+    async debouncedSearchPlaces() {},
     onClear() {
       this.$emit("input", null);
       this.$emit("clear");
+    },
+    emitInputOnMountedSearch(place) {
+      this.setPlace(place);
+      this.$emit("input", this.place);
+    },
+    setPlace(place) {
+      this.place = place;
     },
     debounce(callback, wait, immediate) {
       let timeout;
