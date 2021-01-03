@@ -113,9 +113,9 @@ The documentation for the usage can be found in the [API Reference](https://deve
 
 Since the `types` property of the Here Autocomplete API offers only limited possibilities to build for example a country picker, the search results can be filtered by the properties contained in the search result object.
 
-_CAUTION_ the fields in the result objects are not always consistent. For what exactly to filter for in order to achieve the desired restriction, see the [examples of the API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics-api/code-autocomplete-examples.html) and the [API Reference](https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html).
+*CAUTION* the fields in the result objects are not always consistent. For what exactly to filter for in order to achieve the desired restriction, see the [examples of the API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics-api/code-autocomplete-examples.html) and the [API Reference](https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html).
 
-_In any case, the `types` property must also be set_, since the filtering is based only on the 5 (default) results returned by the API.
+*In any case, the `types` property must also be set*, since the filtering is based only on the 5 (default) results returned by the API.
 
 Example: To limit the results to countries, the properties `types="area"` and `administrative-area-type="country"` must be set.
 
