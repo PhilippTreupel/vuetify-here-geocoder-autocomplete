@@ -1,6 +1,6 @@
 # Vuetify Here Geocoder Autocomplete
 
-> A wrapper for the v-autocomplete component from [Vuetfiy](https://vuetifyjs.com) to use the **autocomplete feature of the new [HERE Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autocomplete-brief.html)**
+> A wrapper for the v-autocomplete component from [Vuetify](https://vuetifyjs.com) to use the **autocomplete feature of the new [HERE Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autocomplete-brief.html)**
 
 ## Demo
 
@@ -158,7 +158,7 @@ For example like this:
   "id": "here:af:streetsection:yS70afKYO41l5M.aTlXOQD:CgcIBCDVrstQEAEaATE",
   "resultType": "houseNumber",
   "houseNumberType": "PA",
-  "address": {...},
+  "address": {},
   "highlights": {
     "title": [
       {

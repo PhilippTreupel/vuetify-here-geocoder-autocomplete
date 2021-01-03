@@ -1,3 +1,11 @@
 module.exports = {
-  transpileDependencies: ["vuetify"]
+  transpileDependencies: ["vuetify"],
+  css: {
+    extract: false
+  },
+  configureWebpack: {
+    output: {
+      libraryExport: "default"
+    }
+  }
 };

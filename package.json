@@ -1,16 +1,39 @@
 {
   "name": "vuetify-here-geocoder-autocomplete",
-  "version": "0.1.0",
   "author": "Philipp Treupel",
+  "homepage": "https://github.com/PhilippTreupel/vuetify-here-geocoder-autocomplete#vuetify-here-geocoder-autocomplete",
+  "description": "A wrapper for the v-autocomplete component from Vuetify to use the autocomplete feature of the new HERE Geocoding & Search API",
+  "keywords": [
+    "vue",
+    "vuetify",
+    "here",
+    "maps",
+    "geocoder",
+    "geocoding",
+    "search",
+    "API",
+    "autocomplete",
+    "v-autocomplete",
+    "material design"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PhilippTreupel/vuetify-here-geocoder-autocomplete.git"
+  },
+  "version": "0.0.0-development",
   "license": "MIT",
   "main": "dist/VHereGeocoderAutocomplete.common.js",
-  "homepage": "",
+  "cdn": "dist/VHereGeocoderAutocomplete.umd.min.js",
+  "browser": "dist/VHereGeocoderAutocomplete.umd.min.js",
+  "unpkg": "dist/VHereGeocoderAutocomplete.umd.min.js",
+  "jsdelivr": "dist/VHereGeocoderAutocomplete.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --name VHereGeocoderAutocomplete src/components/VHereGeocoderAutocomplete.vue"
+    "build:lib": "vue-cli-service build --target lib --name VHereGeocoderAutocomplete src/components/VHereGeocoderAutocomplete.vue",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {},
   "devDependencies": {
@@ -31,6 +54,7 @@
     "prettier": "^1.19.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
+    "semantic-release": "^17.3.1",
     "sinon": "^9.2.2",
     "vue": "^2.6.11",
     "vue-cli-plugin-vuetify": "^2.0.9",
