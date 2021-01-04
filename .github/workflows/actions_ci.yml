@@ -10,7 +10,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  deploy-demo:
     runs-on: ubuntu-latest
 
     steps:
