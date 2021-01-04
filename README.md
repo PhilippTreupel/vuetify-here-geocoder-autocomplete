@@ -24,7 +24,7 @@ npm install vuetify-here-geocoder-autocomplete
 
 # Yarn
 yarn add vuetify-here-geocoder-autocomplete
-```
+``` 
 
 You also need to sign up for a free account with [Here](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account) which offers you 250K transactions per month for free (as of 2021) to generate an API key.
 
