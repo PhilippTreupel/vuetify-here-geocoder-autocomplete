@@ -86,10 +86,10 @@ jobs:
           fail_ci_if_error: true
 
       - name: Build library
-          run: npm run build:lib
+        run: npm run build:lib
 
       - name: Publish library to npm
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
