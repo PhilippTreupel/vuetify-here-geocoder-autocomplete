@@ -4,7 +4,7 @@
 
 ## Demo
 
-A demo is available [here](#Demo).
+A demo is available [here](https://philipptreupel.github.io/vuetify-here-geocoder-autocomplete/).
 
 ## Installation
 
