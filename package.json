@@ -20,7 +20,7 @@
     "type": "git",
     "url": "https://github.com/PhilippTreupel/vuetify-here-geocoder-autocomplete.git"
   },
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/VHereGeocoderAutocomplete.common.js",
   "cdn": "dist/VHereGeocoderAutocomplete.umd.min.js",
