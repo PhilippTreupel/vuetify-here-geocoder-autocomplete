@@ -1,0 +1,95 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: vuetify-here-geocoder-autocomplete-ci
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # The git history is needed for good evaluation of Pull Request commit messages.
+          # By default this action checkout only last commit.
+          # For PR it's temporary merge commit to current master and orginal commit message is missing.
+          # For big projects can be set to 1000 for performance reasons.
+          fetch-depth: '0'
+      - uses: mstachniuk/ci-skip@v1 # If the commit message (or a merge message) contains [ci skip] (in subject of body) the action will stop
+        with:
+          fail-fast: true
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create an .env file
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_DEBUG: false
+          envkey_VUE_APP_HERE_API_KEY: ${{ secrets.HERE_API_KEY }}
+          file_name: .env
+
+      - name: Generate static demo app
+        run: npm run build
+
+      - name: Deploy to github pages
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: demo
+          FOLDER: dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-lib:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # The git history is needed for good evaluation of Pull Request commit messages.
+          # By default this action checkout only last commit.
+          # For PR it's temporary merge commit to current master and orginal commit message is missing.
+          # For big projects can be set to 1000 for performance reasons.
+          fetch-depth: '0'
+      - uses: mstachniuk/ci-skip@v1 # If the commit message (or a merge message) contains [ci skip] (in subject of body) the action will stop
+        with:
+          fail-fast: true
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:unit
+
+      - name: Upload test report to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/clover.xml
+          flags: unittests
+          fail_ci_if_error: true
+
+      - name: Build library
+          run: npm run build:lib
+
+      - name: Publish library to npm
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          run: npx semantic-release
