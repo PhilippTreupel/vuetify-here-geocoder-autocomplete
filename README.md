@@ -1,7 +1,8 @@
 # Vuetify Here Geocoder Autocomplete
 
 > A wrapper for the v-autocomplete component from [Vuetify](https://vuetifyjs.com) to use the **autocomplete feature of the new [HERE Geocoding & Search API](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/endpoint-autocomplete-brief.html)**
-
+><br>
+>
 >![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/PhilippTreupel/vuetify-here-geocoder-autocomplete/release-library/main?logo=github&style=for-the-badge)
 >![Codecov branch](https://img.shields.io/codecov/c/github/PhilippTreupel/vuetify-here-geocoder-autocomplete/main?color=green&style=for-the-badge&logo=codecov)
 >[![VueJS 2.x](https://img.shields.io/badge/vue-2.x-brightgreen.svg?style=for-the-badge)](https://vuejs.org)
