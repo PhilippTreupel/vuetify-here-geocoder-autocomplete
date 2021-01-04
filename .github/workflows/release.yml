@@ -1,0 +1,49 @@
+name: release-library
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy-lib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # The git history is needed for good evaluation of Pull Request commit messages.
+          # By default this action checkout only last commit.
+          # For PR it's temporary merge commit to current master and orginal commit message is missing.
+          # For big projects can be set to 1000 for performance reasons.
+          fetch-depth: "0"
+      - uses: mstachniuk/ci-skip@v1 # If the commit message (or a merge message) contains [ci skip] (in subject of body) the action will stop
+        with:
+          fail-fast: true
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:unit
+
+      - name: Upload test report to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/clover.xml
+          flags: unittests
+          fail_ci_if_error: true
+
+      - name: Build library
+        run: npm run build:lib
+
+      - name: Relese
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
