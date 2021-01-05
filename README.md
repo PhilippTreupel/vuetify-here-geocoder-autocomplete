@@ -26,7 +26,7 @@ npm install vuetify-here-geocoder-autocomplete
 yarn add vuetify-here-geocoder-autocomplete
 ``` 
 
-You also need to sign up for a free account with [Here](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account) which offers you 250K transactions per month for free (as of 2021) to generate an API key.
+You also need to sign up for a free account with [Here](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account), which offers 250K transactions per month for free (starting in 2021), to generate an API key.
 
 :warning: Warning: The autocomplete function of the HERE Geocoding & Search API is currently still in BETA state. But works fine in combination with this library. :warning:
 
@@ -142,7 +142,7 @@ Example: To limit the results to countries, the properties `types="area"` and `a
 | `custom-highlight` | `Function`                       |                    | See [Custom Highlighting](#custom-highlighting)                             |
 | `prependIcon`      | `String`                         | `"mdi-map-marker"` | Default styling, you can overwrite it like every other Vuetify property     |
 
-######**Furthermore, every prop from [Vuetify Autocomplete component](https://vuetifyjs.com/en/api/v-autocomplete/#props) is supported**, except `items`, `search-input.sync`, `filter`, `loading`, and `return-object` which are used internally.
+###### **Furthermore, every prop from [Vuetify Autocomplete component](https://vuetifyjs.com/en/api/v-autocomplete/#props) is supported**, except `items`, `search-input.sync`, `filter`, `loading`, and `return-object` which are used internally.
 
 ### Events
 
