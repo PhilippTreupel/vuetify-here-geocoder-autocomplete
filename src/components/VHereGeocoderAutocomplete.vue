@@ -40,7 +40,13 @@ export default {
     },
     hereApiKey: {
       type: String,
-      required: true
+      required: false,
+      default: null
+    },
+    hereBearerOAuthToken: {
+      type: String,
+      required: false,
+      default: null
     },
     at: {
       type: String,
@@ -150,8 +156,9 @@ export default {
       if (this.query != null) {
         finalSearchQuery += this.query.replace(/\s/g, "+");
       }
-
-      finalSearchQuery += "&apiKey=" + this.hereApiKey;
+      if (this.hereBearerOAuthToken == null) {
+        finalSearchQuery += "&apiKey=" + this.hereApiKey;
+      }
       if (this.at !== null) {
         finalSearchQuery += "&at=" + this.at;
       }
@@ -173,9 +180,24 @@ export default {
       return (
         this.query !== null && this.query !== undefined && this.query !== ""
       );
+    },
+    fetchCallOptions() {
+      if (this.hereBearerOAuthToken == null) {
+        return {};
+      } else {
+        return {
+          headers: { Authorization: "Bearer " + this.hereBearerOAuthToken }
+        };
+      }
     }
   },
   watch: {
+    $props: {
+      immediate: true,
+      handler() {
+        this.validateProps();
+      }
+    },
     query(val) {
       if (val !== null && val !== undefined && val.length >= 1) {
         this.debouncedSearchPlaces();
@@ -219,7 +241,9 @@ export default {
       this.loading = true;
       try {
         if (this.queryReady) {
-          let searchResults = await (await fetch(this.searchQuery)).json();
+          let searchResults = await (
+            await fetch(this.searchQuery, this.fetchCallOptions)
+          ).json();
           searchResults = searchResults.items;
           if (searchResults !== null && searchResults !== undefined) {
             this.loading = false;
@@ -303,6 +327,15 @@ export default {
         timeout = setTimeout(later, wait);
         if (callNow) callback.apply(context, args);
       };
+    },
+    validateProps() {
+      // validate that at least one auth method is defined
+      if (this.hereApiKey == null && this.hereBearerOAuthToken == null) {
+        console.error(
+          "Component error <v-here-geocoder-autocomplete>: One of the Here API authentication properties is required and must be defined. \n" +
+            "Either 'hereApiKey' with a valid API key or 'hereBearerOAuthToken' with an unexpired OAuth token that can be obtained via the Here API OAuth interface.  "
+        );
+      }
     }
   }
 };

@@ -39,8 +39,7 @@ describe("VHereGeocoderAutocomplete.vue", () => {
         searchPlaces: searchPlacesMock
       }
     });
-
-    expect(wrapper.vm.query).toBe("Berlin");
+    expect(wrapper.vm.query).toBe(place);
     await flushPromises();
     expect(searchPlacesMock.called).toBe(true);
   });
@@ -274,6 +273,29 @@ describe("VHereGeocoderAutocomplete.vue", () => {
     wrapper.vm.query = "QUERY QUERY";
     expect(wrapper.vm.searchQuery).toBe(
       "https://autocomplete.search.hereapi.com/v1/autocomplete?q=QUERY+QUERY&apiKey=HERE_API_KEY&at=AT&in=IN&limit=1&types=TYPES&lang=LANG"
+    );
+  });
+  it("logs an error if none of the auth props are set", async () => {
+    jest.spyOn(console, "error").mockImplementationOnce(() => {});
+    wrapper = mount(VHereGeocoderAutocomplete, {
+      localVue,
+      vuetify,
+      propsData: {}
+    });
+    expect(console.error).toHaveBeenCalled();
+  });
+  it("returns the right options for fetch() if 'hereBearerOAuthToken' is set", async () => {
+    const authToken = "OAUTH_TOKEN";
+    wrapper = mount(VHereGeocoderAutocomplete, {
+      localVue,
+      vuetify,
+      propsData: {
+        hereBearerOAuthToken: authToken
+      }
+    });
+
+    expect(wrapper.vm.fetchCallOptions.headers.Authorization).toEqual(
+      "Bearer " + authToken
     );
   });
 });
