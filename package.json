@@ -62,7 +62,7 @@
     "prettier": "^1.19.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
-    "semantic-release": "^17.3.1",
+    "semantic-release": "^17.4.2",
     "sinon": "^9.2.2",
     "vue": "^2.6.11",
     "vue-cli-plugin-vuetify": "^2.0.9",
