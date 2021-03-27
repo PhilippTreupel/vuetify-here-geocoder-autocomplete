@@ -30,6 +30,9 @@ You also need to sign up for a free account with [Here](https://developer.here.c
 
 :warning: Warning: The autocomplete function of the HERE Geocoding & Search API is currently still in BETA state. But works fine in combination with this library. :warning:
 
+:pushpin: Note: This library does not work with Internet Explorer because it uses the standard Javascript fetch API to communicate with the Here API. You can find more information [here](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#browser_compatibility). <br>
+If it is absolutely mandatory for you to be able to run in Internet Explorer, please create an issue and we can discuss the options.
+
 ## Usage
 
 ```vue
@@ -98,11 +101,14 @@ That means if `place` is equal to `Deutschland, 10557, Berlin, Platz der Republi
 
 ### Props
 
-#### Required Properties
+#### Authentication Properties
 
-| Property       | Type     | Default | Description                                                                                                                          |
-| :------------- | :------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------- |
-| `here-api-key` | `String` |         | [Sign up](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account) with Here to generate a free API key |
+**One** of the two properties **must** be defined for the component to communicate with the Here API.
+
+| Property                   | Type     | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------- | :------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `here-api-key`             | `String` |         | [Sign up](https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account) with Here to generate a free API key                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `here-bearer-o-auth-token` | `String` |         | You can obtain an OAuth token, for example, by using your backend to contact the OAuth interface of Here's Geocoding and Search API with the credentials for Here. The token obtained is then only valid for a limited time and can be passed to the frontend and this component to enable autocomplete requests.<br> This procedure is more difficult than using the API key, but it prevents abuse of the API key, which can be extracted from the frontend and used by third parties for their own purposes at your expense.<br><br>[Further information](https://developer.here.com/documentation/identity-access-management/api-reference-swagger.html) <br>[Guide to get token](https://developer.here.com/documentation/geocoding-search-api/dev_guide/topics/get-credentials-ols.html) |
 
 #### Here API Query Properties
 
@@ -142,7 +148,7 @@ Example: To limit the results to countries, the properties `types="area"` and `a
 | `custom-highlight` | `Function`                       |                    | See [Custom Highlighting](#custom-highlighting)                             |
 | `prependIcon`      | `String`                         | `"mdi-map-marker"` | Default styling, you can overwrite it like every other Vuetify property     |
 
-###### **Furthermore, every prop from [Vuetify Autocomplete component](https://vuetifyjs.com/en/api/v-autocomplete/#props) is supported**, except `items`, `search-input.sync`, `filter`, `loading`, and `return-object` which are used internally.
+**Furthermore, every prop from [Vuetify Autocomplete component](https://vuetifyjs.com/en/api/v-autocomplete/#props) is supported**, except `items`, `search-input.sync`, `filter`, `loading`, and `return-object` which are used internally.
 
 ### Events
 
